@@ -29,5 +29,6 @@ public class Hero {
     }
 
     public void enchant() {
+
     }
 }
