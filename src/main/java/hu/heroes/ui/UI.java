@@ -9,19 +9,15 @@ import java.awt.event.MouseListener;
 
 public class UI {
 
-    private JFrame window = new JFrame();
-    private JTextArea messageText = new JTextArea("Text");
+    private final JFrame window = new JFrame();
+    private final JTextArea messageText = new JTextArea("Text");
     public JPanel backGroundPanels[] = new JPanel[50];
     public JLabel bgLabel[] = new JLabel[50];
     private Hero hero = new Hero();
-
-    //Player UI
-    JPanel playerPanel;
+    private JPanel playerPanel = new JPanel();
 
     JLabel playerLabel;
     JPanel inventoryPanel;
-    public JLabel thunderLabel, fireballLabel, reviveLabel, frozeLabel, arcaneLabel;
-
 
     public UI() {
         createWindow();
@@ -68,7 +64,6 @@ public class UI {
     }
 
     private void initializePlayerImage() {
-        playerPanel = new JPanel();
         playerPanel.setBounds(13, 300, 75, 100);
         playerPanel.setBackground(Color.GRAY);
         window.add(playerPanel);
