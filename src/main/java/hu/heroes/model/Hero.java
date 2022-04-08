@@ -1,68 +1,34 @@
 package hu.heroes.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Hero {
-    private int attack = 1;
-    private int defense = 1;
-    private int magic = 1;
-    private int knowledge = 1;
-    private int moral = 1;
-    private int luck = 1;
+    private int attack;
+    private int defense;
+    private int magic;
+    private int knowledge;
+    private int moral;
+    private int luck;
+    private List<Magic> magics;
 
-    public void errorMsg() {
-        System.err.println("A megadott szam nem helyes!");
+    public Hero() {
+        this.attack = 1;
+        this.defense = 1;
+        this.magic = 1;
+        this.knowledge = 1;
+        this.moral = 1;
+        this.luck = 1;
+        this.magics = Arrays.asList(
+                new Magic("thunderStrike", 60, 5),
+                new Magic("fireball", 120, 9),
+                new Magic("revive", 120, 6),
+                new Magic("froze", 80, 6),
+                new Magic("arcanePower", 150, 10)
+        );
     }
 
-    public int getAttack() {
-        return attack;
-    }
+    public void enchant() {
 
-    public void setAttack(int attack) {
-        if (attack <= 10 && attack >= 1)
-            this.attack = attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public void setDefense(int defense) {
-        if (defense <= 10 && defense >= 1)
-            this.defense = defense;
-    }
-
-    public int getMagic() {
-        return magic;
-    }
-
-    public void setMagic(int magic) {
-        if (magic <= 10 && magic >= 1)
-            this.magic = magic;
-    }
-
-    public int getKnowledge() {
-        return knowledge;
-    }
-
-    public void setKnowledge(int knowledge) {
-        if (knowledge <= 10 && knowledge >= 1)
-            this.knowledge = knowledge;
-    }
-
-    public int getMoral() {
-        return moral;
-    }
-
-    public void setMoral(int moral) {
-        if (moral <= 10 && moral >= 1)
-            this.moral = moral;
-    }
-
-    public int getLuck() {
-        return luck;
-    }
-
-    public void setLuck(int luck) {
-        if (luck <= 10 && luck >= 1)
-            this.luck = luck;
     }
 }
