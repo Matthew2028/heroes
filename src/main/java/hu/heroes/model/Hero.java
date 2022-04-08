@@ -11,6 +11,7 @@ public class Hero {
     private int moral;
     private int luck;
     private List<Magic> magics;
+    private List<Unit> units;
 
     public Hero() {
         this.attack = 1;
@@ -26,6 +27,13 @@ public class Hero {
                 new Magic("froze", 80, 6),
                 new Magic("arcanePower", 150, 10)
         );
+        this.units = Arrays.asList(
+                //new Unit("Földműves", 3, 3, 3)
+        );
+    }
+
+    public List<Magic> getMagics() {
+        return this.magics;
     }
 
     public void enchant() {
