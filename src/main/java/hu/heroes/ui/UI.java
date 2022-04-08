@@ -16,7 +16,6 @@ public class UI {
     private Hero hero = new Hero();
 
     //Player UI
-    private JPanel[] magicPanels = new JPanel[5];
     JPanel playerPanel;
 
     JLabel playerLabel;
@@ -26,7 +25,7 @@ public class UI {
 
     public UI() {
         createMainField();
-        initializePlayerSidebar();
+        initializeSidebar();
         createScreen();
 
         window.setVisible(true);
@@ -76,24 +75,15 @@ public class UI {
     }
 
     private void initializeMagicImages() {
-        var startYPosition = 30;
         var magics = hero.getMagics();
-        for (int i = 0; i < magics.size(); i++) {
-            var panel = new JPanel();
-            panel.setBounds(30, startYPosition, 40, 40);
-            panel.setBackground(Color.YELLOW);
-            magicPanels[i] = panel;
-            startYPosition += 50;
+        for (var panel : MagicPanelUtils.initializeMagicPanels(magics)) {
+            window.add(panel);
         }
     }
 
-    public void initializePlayerSidebar() {
+    public void initializeSidebar() {
         initializePlayerImage();
         initializeMagicImages();
-
-        for (var panel : magicPanels) {
-            window.add(panel);
-        }
     }
 
     public void createObject(int bgNum, int x, int y, int w, int h, String file, String choice1, String choice2, String choice3) {
