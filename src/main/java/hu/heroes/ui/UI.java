@@ -9,8 +9,8 @@ import java.awt.event.MouseListener;
 
 public class UI {
 
-    JFrame window;
-    public JTextArea messageText;
+    private JFrame window = new JFrame();
+    private JTextArea messageText = new JTextArea("Text");
     public JPanel backGroundPanels[] = new JPanel[50];
     public JLabel bgLabel[] = new JLabel[50];
     private Hero hero = new Hero();
@@ -24,23 +24,23 @@ public class UI {
 
 
     public UI() {
-        createMainField();
+        createWindow();
+        createBottomTextArea();
         initializeSidebar();
         createScreen();
 
         window.setVisible(true);
     }
 
-    public void createMainField() {
-        //window
-        window = new JFrame();
+    private void createWindow() {
         window.setSize(1200, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
         window.setLayout(null);
         window.setResizable(false);
+    }
 
-        messageText = new JTextArea("Text");
+    private void createBottomTextArea() {
         messageText.setBounds(50, 660, 1090, 80);
         messageText.setBackground(Color.blue);
         messageText.setForeground(Color.white);
