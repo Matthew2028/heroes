@@ -1,5 +1,7 @@
 package hu.heroes.ui;
 
+import hu.heroes.model.Hero;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,16 +11,13 @@ public class UI {
 
     JFrame window;
     public JTextArea messageText;
-    public JPanel bgPanel[] = new JPanel[50];
+    public JPanel backGroundPanels[] = new JPanel[50];
     public JLabel bgLabel[] = new JLabel[50];
+    private Hero hero = new Hero();
 
     //Player UI
+    private JPanel[] magicPanels = new JPanel[5];
     JPanel playerPanel;
-    JPanel thunderPanel;
-    JPanel fireballPanel;
-    JPanel revivePanel;
-    JPanel frozePanel;
-    JPanel arcanePanel;
 
     JLabel playerLabel;
     JPanel inventoryPanel;
@@ -27,7 +26,7 @@ public class UI {
 
     public UI() {
         createMainField();
-        createPlayer();
+        initializePlayerSidebar();
         createScreen();
 
         window.setVisible(true);
@@ -53,54 +52,48 @@ public class UI {
         window.add(messageText);
     }
 
-    public void createBackGround(int bgNum, String bgFile) {
-        //palya generalas
-        bgPanel[bgNum] = new JPanel();
-        bgPanel[bgNum].setBounds(100, 30, 990, 600);
-        bgPanel[bgNum].setBackground(Color.CYAN);
-        bgPanel[bgNum].setLayout(null);
-        window.add(bgPanel[0]);
+    private void initializeBoard(int bgNum) {
+        backGroundPanels[bgNum] = new JPanel();
+        backGroundPanels[bgNum].setBounds(100, 30, 990, 600);
+        backGroundPanels[bgNum].setLayout(null);
+        window.add(backGroundPanels[0]);
+    }
 
+    public void createBackGround(int bgNum, String backGroundFileName) {
+        initializeBoard(bgNum);
 
         bgLabel[bgNum] = new JLabel();
         bgLabel[bgNum].setBounds(0, 0, 990, 600);
-        ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(bgFile));
+        ImageIcon bgIcon = new ImageIcon(getClass().getClassLoader().getResource(backGroundFileName));
         bgLabel[bgNum].setIcon(bgIcon);
     }
 
-    public void createPlayer() {
-        //player generalas
+    private void initializePlayerImage() {
         playerPanel = new JPanel();
         playerPanel.setBounds(13, 300, 75, 100);
         playerPanel.setBackground(Color.GRAY);
         window.add(playerPanel);
+    }
 
+    private void initializeMagicImages() {
+        var startYPosition = 30;
+        var magics = hero.getMagics();
+        for (int i = 0; i < magics.size(); i++) {
+            var panel = new JPanel();
+            panel.setBounds(30, startYPosition, 40, 40);
+            panel.setBackground(Color.YELLOW);
+            magicPanels[i] = panel;
+            startYPosition += 50;
+        }
+    }
 
-        //player magic generalasa
-        thunderPanel = new JPanel();
-        thunderPanel.setBounds(30, 30, 40, 40);
-        thunderPanel.setBackground(Color.yellow);
-        window.add(thunderPanel);
+    public void initializePlayerSidebar() {
+        initializePlayerImage();
+        initializeMagicImages();
 
-        fireballPanel = new JPanel();
-        fireballPanel.setBounds(30, 80, 40, 40);
-        fireballPanel.setBackground(Color.red);
-        window.add(fireballPanel);
-
-        revivePanel = new JPanel();
-        revivePanel.setBounds(30, 130, 40, 40);
-        revivePanel.setBackground(Color.white);
-        window.add(revivePanel);
-
-        frozePanel = new JPanel();
-        frozePanel.setBounds(30, 180, 40, 40);
-        frozePanel.setBackground(Color.blue);
-        window.add(frozePanel);
-
-        arcanePanel = new JPanel();
-        arcanePanel.setBounds(30, 230, 40, 40);
-        arcanePanel.setBackground(Color.MAGENTA);
-        window.add(arcanePanel);
+        for (var panel : magicPanels) {
+            window.add(panel);
+        }
     }
 
     public void createObject(int bgNum, int x, int y, int w, int h, String file, String choice1, String choice2, String choice3) {
@@ -147,8 +140,8 @@ public class UI {
             }
         });
 
-        bgPanel[bgNum].add(objLabel);
-        bgPanel[bgNum].add(bgLabel[bgNum]);
+        backGroundPanels[bgNum].add(objLabel);
+        backGroundPanels[bgNum].add(bgLabel[bgNum]);
 
 
     }
@@ -163,6 +156,6 @@ public class UI {
     }
 
     public static void main(String[] args) {
-        UI ui = new UI();
+        new UI();
     }
 }
